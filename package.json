@@ -1,0 +1,19 @@
+{
+  "name": "gha-setup-ninja",
+  "version": "1.0.0",
+  "description": "Install ninja tool into path",
+  "main": "dist/index.js",
+  "author": "Sean Middleditch",
+  "license": "CC0",
+  "scripts": {
+    "postinstall": "npm run build",
+    "build": "ncc build index.js -o dist",
+    "dev": "npm run build && ncc run index.js"
+  },
+  "devDependencies": {
+    "@actions/core": "^1.1.1",
+    "adm-zip": "^0.4.13",
+    "follow-redirects": "^1.9.0",
+    "@zeit/ncc": "^0.20.5"
+  }
+}

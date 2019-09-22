@@ -1,0 +1,15 @@
+name: 'Install ninja-build tool'
+description: 'Installs ninja and adds it to the path'
+inputs:
+  version:
+    description: 'Version of ninja-build to install'
+    default: '1.9.0'
+    required: true
+  platform:
+    description: 'Override default platform with one of [win, mac, linux]'
+  destination:
+    description: 'Destination directory, will be added to PATH'
+    default: 'ninja-build'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
