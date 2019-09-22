@@ -23,4 +23,4 @@ jobs:
         with:
           version: '${{ matrix.version }}'
       - shell: bash
-        run: '[ "$(ninja --version)" -eq "${{ matrix.version }}" ]'
+        run: '[ "$(ninja --version)" == "${{ matrix.version }}" ]'
