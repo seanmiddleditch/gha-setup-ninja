@@ -14,9 +14,13 @@ jobs:
     strategy:
       matrix:
         image: [ 'windows-latest', 'ubuntu-latest', 'macos-latest' ]
+        version: [ '1.9.0' ]
 
     steps:
       - uses: actions/checkout@master
       - uses: actions/setup-node@v1
       - uses: ./
-      - run: ninja --version
+        with:
+          version: '${{ matrix.version }}'
+      - shell: bash
+        run: '[ "$(ninja --version)" -eq "${{ matrix.version }}" ]'
