@@ -1,5 +1,8 @@
 name: 'Install ninja-build tool'
 description: 'Installs ninja and adds it to the path'
+branding:
+  icon: 'terminal'
+  color: 'white'
 inputs:
   version:
     description: 'Version of ninja-build to install'
