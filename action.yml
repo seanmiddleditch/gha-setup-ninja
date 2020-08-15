@@ -6,7 +6,7 @@ branding:
 inputs:
   version:
     description: 'Version of ninja-build to install'
-    default: '1.9.0'
+    default: '1.10.0'
     required: true
   platform:
     description: 'Override default platform with one of [win, mac, linux]'
