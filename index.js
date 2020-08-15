@@ -22,7 +22,6 @@ try {
     if (error) throw error
 
     const url = new URL(`https://github.com/ninja-build/ninja/releases/download/v${version}/ninja-${platform}.zip`)
-    //const url = new URL('https://google.com')
     console.log(`downloading ${url}`)
 
     const request = https.get(url, {followAllRedirects: true}, result => {
@@ -58,11 +57,14 @@ try {
 
             const result = spawn(fullFileDir, ['--version'], {encoding: 'utf8'})
             if (result.error) throw error
-
+            
             console.log('$ ninja --version')
             console.log(result.stdout)
-
+            
             core.addPath(fullDestDir)
+            console.log(`added '${fullDestDir}' to 'PATH'`)
+
+            console.log(process.env['PATH'])
         })
     })
     request.on('error', error => { throw error })
