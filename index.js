@@ -57,9 +57,10 @@ try {
 
             const result = spawn(fullFileDir, ['--version'], {encoding: 'utf8'})
             if (result.error) throw error
+            const output = `${result.stdout}`.trim()
             
             console.log('$ ninja --version')
-            console.log(result.stdout)
+            console.log(output)
             
             core.addPath(fullDestDir)
             console.log(`added '${fullDestDir}' to 'PATH'`)
