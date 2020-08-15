@@ -22,7 +22,6 @@ try {
     if (error) throw error
 
     const url = new URL(`https://github.com/ninja-build/ninja/releases/download/v${version}/ninja-${platform}.zip`)
-    //const url = new URL('https://google.com')
     console.log(`downloading ${url}`)
 
     const request = https.get(url, {followAllRedirects: true}, result => {
@@ -34,8 +33,6 @@ try {
             const length = data.reduce((len, chunk) => len + chunk.length, 0)
             const buffer = Buffer.alloc(length)
 
-            console.log(`received file, size ${buffer.length}`)
-
             data.reduce((pos, chunk) => {
                 chunk.copy(buffer, pos)
                 return pos + chunk.length
@@ -43,26 +40,34 @@ try {
 
             const zip = new AdmZip(buffer)
             const entry = zip.getEntries()[0]
+            const ninjaName = entry.entryName
 
             const fullDestDir = path.resolve(process.cwd(), destDir)
             if (!fs.existsSync(fullDestDir)) fs.mkdirSync(fullDestDir, {recursive: true})
 
-            zip.extractEntryTo(entry.entryName, fullDestDir)
+            zip.extractEntryTo(ninjaName, fullDestDir, /*maintainEntryPath*/false, /*overwrite*/true)
 
-            const fullFileDir = path.join(fullDestDir, entry.entryName)
+            const fullFileDir = path.join(fullDestDir, ninjaName)
             if (!fs.existsSync(fullFileDir)) throw new Error(`failed to extract to '${fullFileDir}'`)
 
             fs.chmodSync(fullFileDir, '755')
 
-            console.log(`extracted '${entry.entryName}' to '${fullFileDir}'`)
-
-            const result = spawn(fullFileDir, ['--version'], {encoding: 'utf8'})
-            if (result.error) throw error
-
-            console.log('$ ninja --version')
-            console.log(result.stdout)
+            console.log(`extracted '${ninjaName}' to '${fullFileDir}'`)
 
             core.addPath(fullDestDir)
+            console.log(`added '${fullDestDir}' to PATH`)
+            
+            const result = spawn(ninjaName, ['--version'], {encoding: 'utf8'})
+            if (result.error) throw error
+
+            const installedVersion = result.stdout.trim()
+            
+            console.log(`$ ${ninjaName} --version`)
+            console.log(installedVersion)
+
+            if (installedVersion != version) {
+                throw new Error('incorrect version detected (bad PATH configuration?)')
+            }
         })
     })
     request.on('error', error => { throw error })
