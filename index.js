@@ -55,17 +55,16 @@ try {
 
             console.log(`extracted '${entry.entryName}' to '${fullFileDir}'`)
 
-            const result = spawn(fullFileDir, ['--version'], {encoding: 'utf8'})
-            if (result.error) throw error
-            const output = `${result.stdout}`.trim()
-            
-            console.log('$ ninja --version')
-            console.log(output)
-            
             core.addPath(fullDestDir)
             console.log(`added '${fullDestDir}' to 'PATH'`)
 
             console.log(process.env['PATH'])
+            
+            const result = spawn(fullFileDir, ['--version'], {encoding: 'utf8'})
+            if (result.error) throw error
+            
+            console.log('$ ninja --version')
+            console.log(result.stdout)
         })
     })
     request.on('error', error => { throw error })
