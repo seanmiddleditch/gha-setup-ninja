@@ -6,6 +6,8 @@ const fs = require('fs')
 const URL = require('url').URL
 const { https } = require('follow-redirects')
 const AdmZip = require('adm-zip')
+const HttpsProxyAgent = require('https-proxy-agent')
+var proxy = process.env.http_proxy || 'http://168.63.76.32:3128';
 
 const selectPlatforn = (platform) =>
     platform ? [null, platform] :
@@ -17,13 +19,19 @@ const selectPlatforn = (platform) =>
 try {
     const version = core.getInput('version', {required: true})
     const destDir = core.getInput('destination') || 'ninja-build'
+    const proxyServer = core.getInput('http_proxy')
 
     const [error, platform] = selectPlatforn(core.getInput('platform'));
     if (error) throw error
 
     const url = new URL(`https://github.com/ninja-build/ninja/releases/download/v${version}/ninja-${platform}.zip`)
-    console.log(`downloading ${url}`)
 
+    if (proxyServer) {
+        console.log(`using proxy ${proxyServer}`)
+        url.agent = new HttpsProxyAgent(proxyServer)
+    }
+
+    console.log(`downloading ${url}`)
     const request = https.get(url, {followAllRedirects: true}, result => {
         const data = []
 
