@@ -15,5 +15,8 @@
     "adm-zip": "^0.4.13",
     "follow-redirects": "^1.9.0",
     "@zeit/ncc": "^0.20.5"
+  },
+  "dependencies": {
+    "https-proxy-agent": "^5.0.0"
   }
 }

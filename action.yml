@@ -10,9 +10,14 @@ inputs:
     required: true
   platform:
     description: 'Override default platform with one of [win, mac, linux]'
+    required: false
   destination:
     description: 'Destination directory, will be added to PATH'
     default: 'ninja-build'
+    required: false
+  http_proxy:
+    description: 'Proxy server'
+    required: false
 runs:
   using: 'node12'
   main: 'dist/index.js'
