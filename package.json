@@ -11,9 +11,9 @@
     "dev": "npm run build && ncc run index.js"
   },
   "devDependencies": {
-    "@actions/core": "^1.2.6",
+    "@actions/core": "^1.9.1",
     "adm-zip": "^0.4.13",
-    "follow-redirects": "^1.14.7",
+    "follow-redirects": "^1.14.8",
     "@zeit/ncc": "^0.20.5"
   },
   "dependencies": {
