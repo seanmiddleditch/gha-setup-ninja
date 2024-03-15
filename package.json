@@ -13,7 +13,7 @@
   "devDependencies": {
     "@actions/core": "^1.9.1",
     "adm-zip": "^0.4.13",
-    "follow-redirects": "^1.14.8",
+    "follow-redirects": "^1.15.6",
     "@zeit/ncc": "^0.20.5"
   },
   "dependencies": {
