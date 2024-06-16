@@ -11,7 +11,7 @@ Supports Windows, Linux, and macOS.
 
 Inputs:
 
-- `version`: Version of ninja to install (default: 1.10.2)
+- `version`: Version of ninja to install (default: 1.11.1)
 - `platform`: Override platform detection logic
 - `destination`: Target directory for download, added to `PATH`
   (default: `${GITHUB_WORKSPACE}/ninja-build`)
