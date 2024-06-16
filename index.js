@@ -7,7 +7,6 @@ const URL = require('url').URL
 const { https } = require('follow-redirects')
 const AdmZip = require('adm-zip')
 const HttpsProxyAgent = require('https-proxy-agent')
-var proxy = process.env.http_proxy || 'http://168.63.76.32:3128';
 
 const selectPlatforn = (platform) =>
     platform ? [null, platform] :

@@ -335,7 +335,6 @@ const URL = __webpack_require__(835).URL
 const { https } = __webpack_require__(549)
 const AdmZip = __webpack_require__(639)
 const HttpsProxyAgent = __webpack_require__(338)
-var proxy = process.env.http_proxy || 'http://168.63.76.32:3128';
 
 const selectPlatforn = (platform) =>
     platform ? [null, platform] :

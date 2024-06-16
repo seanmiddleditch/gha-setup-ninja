@@ -19,5 +19,5 @@ inputs:
     description: 'Proxy server'
     required: false
 runs:
-  using: 'node16'
+  using: 'node20'
   main: 'dist/index.js'
