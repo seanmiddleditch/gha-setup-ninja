@@ -31424,15 +31424,15 @@ module.exports = parseParams
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-const core = __nccwpck_require__(2186)
-const process = __nccwpck_require__(7282)
-const spawn = (__nccwpck_require__(2081).spawnSync)
-const path = __nccwpck_require__(1017)
-const fs = __nccwpck_require__(7147)
-const URL = (__nccwpck_require__(7310).URL)
-const { https } = __nccwpck_require__(7707)
-const AdmZip = __nccwpck_require__(6761)
-const HttpsProxyAgent = __nccwpck_require__(7219)
+const core = require('@actions/core')
+const process = require('process')
+const spawn = require('child_process').spawnSync
+const path = require('path')
+const fs = require('fs')
+const URL = require('url').URL
+const { https } = require('follow-redirects')
+const AdmZip = require('adm-zip')
+const HttpsProxyAgent = require('https-proxy-agent')
 
 function selectPlatform(platform, version) {
     if (platform) {
