@@ -15,7 +15,7 @@ function selectPlatform(platform, version) {
     
     let major, minor, patch = version.split('.').map((s) => parseInt(s))
     if (process.platform === 'win32') {
-        if (process.arch == 'arm64') {
+        if (process.arch === 'arm64') {
             if (major < 1 || major == 1 && minor < 12) {
                 return [new Error(`Windows ARM builds are only available for 1.12.0 and later`), '']
             }
@@ -31,7 +31,7 @@ function selectPlatform(platform, version) {
         }
     }
     else if (process.platform === 'linux') {
-        if (process.arch == 'arm64') {
+        if (process.arch === 'arm64') {
             if (major < 1 || major == 1 && minor < 12) {
                 return [new Error(`Linux ARM builds are only available for 1.12.0 and later`), '']
             }
