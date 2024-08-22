@@ -8,19 +8,58 @@ const { https } = require('follow-redirects')
 const AdmZip = require('adm-zip')
 const HttpsProxyAgent = require('https-proxy-agent')
 
-const selectPlatforn = (platform) =>
-    platform ? [null, platform] :
-    process.platform === 'win32' ? [null, 'win'] :
-    process.platform === 'darwin' ? [null, 'mac'] :
-    process.platform === 'linux' ? [null, 'linux'] :
-    [new Error(`Unsupported platform '${process.platform}'`), '']
+function selectPlatform(platform, version) {
+    if (platform) {
+        return [null, platform]
+    }
+    
+    let major, minor, patch = version.split('.').map((s) => parseInt(s))
+    if (process.platform === 'win32') {
+        if (process.arch == 'arm64') {
+            if (major < 1 || major == 1 && minor < 12) {
+                return [new Error(`Windows ARM builds are only available for 1.12.0 and later`), '']
+            }
+            else {
+                return [null, 'winarm64']
+            }
+        }
+        else if (process.arch === 'x64') {
+            return [null, 'win']
+        }
+        else {
+            return [new Error(`Unsupported architecture '${process.arch}'`), '']
+        }
+    }
+    else if (process.platform === 'linux') {
+        if (process.arch == 'arm64') {
+            if (major < 1 || major == 1 && minor < 12) {
+                return [new Error(`Linux ARM builds are only available for 1.12.0 and later`), '']
+            }
+            else {
+                return [null, 'linux-aarch64']
+            }
+        }
+        else if (process.arch === 'x64') {
+            return [null, 'linux']
+        }
+        else {
+            return [new Error(`Unsupported architecture '${process.arch}'`), '']
+        }
+    }
+    else if (process.platform === 'darwin') {
+        return [null, 'mac']
+    }
+    else {
+        return [new Error(`Unsupported platform '${process.platform}'`), '']
+    }
+}
 
 try {
     const version = core.getInput('version', {required: true})
     const destDir = core.getInput('destination') || 'ninja-build'
     const proxyServer = core.getInput('http_proxy')
 
-    const [error, platform] = selectPlatforn(core.getInput('platform'));
+    const [error, platform] = selectPlatform(core.getInput('platform'), version);
     if (error) throw error
 
     const url = new URL(`https://github.com/ninja-build/ninja/releases/download/v${version}/ninja-${platform}.zip`)

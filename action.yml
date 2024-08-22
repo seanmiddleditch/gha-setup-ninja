@@ -6,10 +6,10 @@ branding:
 inputs:
   version:
     description: 'Version of ninja-build to install'
-    default: '1.11.1'
+    default: '1.12.1'
     required: true
   platform:
-    description: 'Override default platform with one of [win, mac, linux]'
+    description: 'Override default platform with one of [win, mac, linux, winarm64, linux-aarch64]'
     required: false
   destination:
     description: 'Destination directory, will be added to PATH'
