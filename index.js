@@ -59,7 +59,7 @@ try {
     const destDir = core.getInput('destination') || 'ninja-build'
     const proxyServer = core.getInput('http_proxy')
 
-    const [error, platform] = selectPlatform(core.getInput('platform'), version);
+    const [error, platform] = selectPlatform(core.getInput('platform'), version)
     if (error) throw error
 
     const url = new URL(`https://github.com/ninja-build/ninja/releases/download/v${version}/ninja-${platform}.zip`)
