@@ -15,7 +15,7 @@ jobs:
       fail-fast: false
       matrix:
         image: [ 'windows-latest', 'ubuntu-latest', 'macos-latest', 'ubuntu-24.04-arm' ]
-        version: [ '1.9.0', '1.10.2', '1.11.1' ]
+        version: [ '1.9.0', '1.10.2', '1.11.1', '1.12.1' ]
 
     steps:
       - uses: actions/checkout@master
