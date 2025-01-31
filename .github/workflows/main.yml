@@ -13,8 +13,16 @@ jobs:
 
     strategy:
       matrix:
-        image: [ 'windows-latest', 'ubuntu-latest', 'macos-latest' ]
+        image: [ 'windows-latest', 'ubuntu-latest', 'ubuntu-24.04-arm', 'macos-latest' ]
         version: [ '1.9.0', '1.10.2', '1.11.1', '1.12.1' ]
+        exclude:
+          # ARM binaries aren't available until 1.12
+          - image: 'ubuntu-24.04-arm'
+            version: '1.11.1'
+          - image: 'ubuntu-24.04-arm'
+            version: '1.10.2'
+          - image: 'ubuntu-24.04-arm'
+            version: '1.9.0'
 
     steps:
       - uses: actions/checkout@master
