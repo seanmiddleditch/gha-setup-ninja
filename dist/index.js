@@ -762,7 +762,7 @@ class Summary {
     /**
      * If the summary buffer is empty
      *
-     * @returns {boolen} true if the buffer is empty
+     * @returns {boolean} true if the buffer is empty
      */
     isEmptyBuffer() {
         return this._buffer.length === 0;
@@ -851,10 +851,10 @@ class Summary {
         return this.addRaw(element).addEOL();
     }
     /**
-     * Adds a collapsable HTML details element to the summary buffer
+     * Adds a collapsible HTML details element to the summary buffer
      *
      * @param {string} label text for the closed state
-     * @param {string} content collapsable content
+     * @param {string} content collapsible content
      *
      * @returns {Summary} summary instance
      */
@@ -2268,7 +2268,7 @@ module.exports = function (/**String*/input) {
 		 * @param targetPath Target folder where to write the file
 		 * @param maintainEntryPath If maintainEntryPath is true and the entry is inside a folder, the entry folder
 		 *                          will be created in targetPath as well. Default is TRUE
-		 * @param overwrite If the file already exists at the target path, the file will be overwriten if this is true.
+		 * @param overwrite If the file already exists at the target path, the file will be overwritten if this is true.
 		 *                  Default is FALSE
 		 *
 		 * @return Boolean
@@ -2342,7 +2342,7 @@ module.exports = function (/**String*/input) {
 		 * Extracts the entire archive to the given location
 		 *
 		 * @param targetPath Target location
-		 * @param overwrite If the file already exists at the target path, the file will be overwriten if this is true.
+		 * @param overwrite If the file already exists at the target path, the file will be overwritten if this is true.
 		 *                  Default is FALSE
 		 */
 		extractAllTo: function (/**String*/targetPath, /**Boolean*/overwrite) {
@@ -2373,7 +2373,7 @@ module.exports = function (/**String*/input) {
 		 * Asynchronous extractAllTo
 		 *
 		 * @param targetPath Target location
-		 * @param overwrite If the file already exists at the target path, the file will be overwriten if this is true.
+		 * @param overwrite If the file already exists at the target path, the file will be overwritten if this is true.
 		 *                  Default is FALSE
 		 * @param callback
 		 */
@@ -2573,7 +2573,7 @@ module.exports = function () {
         get offset () { return _offset },
         set offset (val) { _offset = val },
 
-        get encripted () { return (_flags & 1) === 1 },
+        get encrypted () { return (_flags & 1) === 1 },
 
         get entryHeaderSize () {
             return Constants.CENHDR + _fnameLen + _extraLen + _comLen;
@@ -3032,7 +3032,7 @@ module.exports = {
     IBM_LZ77         : 19, //IBM LZ77 z
 
     /* General purpose bit flag */
-    FLG_ENC          : 0,  // encripted file
+    FLG_ENC          : 0,  // encrypted file
     FLG_COMP1        : 1,  // compression option
     FLG_COMP2        : 2,  // compression option
     FLG_DESC         : 4,  // data descriptor
@@ -9897,7 +9897,7 @@ class Client extends DispatcherBase {
     }
 
     if (maxConcurrentStreams != null && (typeof maxConcurrentStreams !== 'number' || maxConcurrentStreams < 1)) {
-      throw new InvalidArgumentError('maxConcurrentStreams must be a possitive integer, greater than 0')
+      throw new InvalidArgumentError('maxConcurrentStreams must be a positive integer, greater than 0')
     }
 
     if (typeof connect !== 'function') {
@@ -9944,7 +9944,7 @@ class Client extends DispatcherBase {
       ? null
       : {
         // streams: null, // Fixed queue of streams - For future support of `push`
-          openStreams: 0, // Keep track of them to decide wether or not unref the session
+          openStreams: 0, // Keep track of them to decide whether or not unref the session
           maxConcurrentStreams: maxConcurrentStreams != null ? maxConcurrentStreams : 100 // Max peerConcurrentStreams for a Node h2 server
         }
     this[kHost] = `${this[kUrl].hostname}${this[kUrl].port ? `:${this[kUrl].port}` : ''}`
@@ -11140,7 +11140,7 @@ function write (client, request) {
   // Sending a payload body on a request that does not
   // expect it can cause undefined behavior on some
   // servers and corrupt connection state. Do not
-  // re-use the connection for further requests.
+  // reuse the connection for further requests.
 
   const expectsPayload = (
     method === 'PUT' ||
@@ -11354,7 +11354,7 @@ function writeH2 (client, session, request) {
   }
 
   // https://tools.ietf.org/html/rfc7540#section-8.3
-  // :path and :scheme headers must be omited when sending CONNECT
+  // :path and :scheme headers must be omitted when sending CONNECT
 
   headers[HTTP2_HEADER_PATH] = path
   headers[HTTP2_HEADER_SCHEME] = 'https'
@@ -11366,7 +11366,7 @@ function writeH2 (client, session, request) {
   // Sending a payload body on a request that does not
   // expect it can cause undefined behavior on some
   // servers and corrupt connection state. Do not
-  // re-use the connection for further requests.
+  // reuse the connection for further requests.
 
   const expectsPayload = (
     method === 'PUT' ||
@@ -11481,7 +11481,7 @@ function writeH2 (client, session, request) {
   // })
 
   // stream.on('push', headers => {
-  //   // TODO(HTTP/2): Suppor push
+  //   // TODO(HTTP/2): Support push
   // })
 
   // stream.on('trailers', headers => {
@@ -12838,10 +12838,10 @@ const { InvalidArgumentError, ConnectTimeoutError } = __nccwpck_require__(8045)
 
 let tls // include tls conditionally since it is not always available
 
-// TODO: session re-use does not wait for the first
+// TODO: session reuse does not wait for the first
 // connection to resolve the session and might therefore
 // resolve the same servername multiple times even when
-// re-use is enabled.
+// reuse is enabled.
 
 let SessionCache
 // FIXME: remove workaround when the Node bug is fixed
@@ -14297,7 +14297,7 @@ function validateHandler (handler, method, upgrade) {
 }
 
 // A body is disturbed if it has been read from and it cannot
-// be re-used without losing state or data.
+// be reused without losing state or data.
 function isDisturbed (body) {
   return !!(body && (
     stream.isDisturbed
@@ -16040,7 +16040,7 @@ function serializeAMimeType (mimeType) {
     // 4. If value does not solely contain HTTP token code
     //    points or value is the empty string, then:
     if (!HTTP_TOKEN_CODEPOINTS.test(value)) {
-      // 1. Precede each occurence of U+0022 (") or
+      // 1. Precede each occurrenceof U+0022 (") or
       //    U+005C (\) in value with U+005C (\).
       value = value.replace(/(\\|")/g, '\\$1')
 
@@ -24219,7 +24219,7 @@ class RedirectHandler {
       !ArrayBuffer.isView(this.opts.body) &&
       util.isIterable(this.opts.body)
     ) {
-      // TODO: Should we allow re-using iterable if !this.opts.idempotent
+      // TODO: Should we allow reusing iterable if !this.opts.idempotent
       // or through some other flag?
       this.opts.body = new BodyAsyncIterable(this.opts.body)
     }
@@ -24287,8 +24287,8 @@ class RedirectHandler {
 
         For status 300, which is "Multiple Choices", the spec mentions both generating a Location
         response header AND a response body with the other possible location to follow.
-        Since the spec explicitily chooses not to specify a format for such body and leave it to
-        servers and browsers implementors, we ignore the body as there is no specified way to eventually parse it.
+        Since the spec explicitly chooses not to specify a format for such body and leave it to
+        servers and browser implementers, we ignore the body as there is no specified way to eventually parse it.
       */
     } else {
       return this.handler.onData(chunk)
@@ -24303,7 +24303,7 @@ class RedirectHandler {
         TLDR: undici always ignores 3xx response trailers as they are not expected in case of redirections
         and neither are useful if present.
 
-        See comment on onData method above for more detailed informations.
+        See comment on onData method above for more detailed information.
       */
 
       this.location = null
