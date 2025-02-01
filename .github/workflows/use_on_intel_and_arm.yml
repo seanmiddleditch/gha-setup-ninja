@@ -21,8 +21,8 @@ jobs:
       with:
         node-version: 23.x
     - uses: seanmiddleditch/gha-setup-ninja@master
+    # The next two will both fail on Ubuntu ARM until there is a new release to npm
     - uses: seanmiddleditch/gha-setup-ninja@v5
       with:
         version: 1.12.1
-    # The next one should fail on Ubuntu ARM until there is a new release to npm
     - uses: seanmiddleditch/gha-setup-ninja@v5
