@@ -1,0 +1,28 @@
+name: use
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+jobs:
+  use:
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - macos-13          # Intel
+          - macos-latest      # ARM
+          - ubuntu-24.04      # Intel
+          - ubuntu-24.04-arm  # ARM
+          - windows-latest    # Intel
+          - windows-2025.     # Intel
+    runs-on: ${{ matrix.os }}
+    steps:
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 23.x
+    - uses: seanmiddleditch/gha-setup-ninja@master
+    - uses: seanmiddleditch/gha-setup-ninja@v5
+      with:
+        version: 1.12.1
+    # The next one should fail on Ubuntu ARM until there is a new release to npm
+    - uses: seanmiddleditch/gha-setup-ninja@v5
