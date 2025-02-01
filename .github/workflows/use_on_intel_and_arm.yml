@@ -14,7 +14,7 @@ jobs:
           - ubuntu-24.04      # Intel
           - ubuntu-24.04-arm  # ARM
           - windows-latest    # Intel
-          - windows-2025.     # Intel
+          - windows-2025      # Intel
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/setup-node@v4
