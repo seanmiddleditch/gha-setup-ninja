@@ -1,12 +1,12 @@
-const core = require('@actions/core')
-const process = require('process')
-const spawn = require('child_process').spawnSync
-const path = require('path')
-const fs = require('fs')
-const URL = require('url').URL
-const { https } = require('follow-redirects')
-const AdmZip = require('adm-zip')
-const HttpsProxyAgent = require('https-proxy-agent')
+import core from "@actions/core";
+import AdmZip from "adm-zip";
+import { HttpsProxyAgent } from "https-proxy-agent";
+import { https } from "follow-redirects";
+import { spawnSync } from "node:child_process";
+import fs from "node:fs";
+import path from "node:path";
+import process from "node:process"
+import { URL } from "node:url";
 
 function selectPlatform(platform, version) {
     if (platform) {
@@ -102,12 +102,12 @@ try {
 
             core.addPath(fullDestDir)
             console.log(`added '${fullDestDir}' to PATH`)
-            
-            const result = spawn(ninjaName, ['--version'], {encoding: 'utf8'})
+
+            const result = spawnSync(ninjaName, ['--version'], {encoding: 'utf8'})
             if (result.error) throw error
 
             const installedVersion = result.stdout.trim()
-            
+
             console.log(`$ ${ninjaName} --version`)
             console.log(installedVersion)
 
