@@ -1,6 +1,11 @@
 setup-ninja
 ==============
 
+> [!WARNING] 
+> This action is no longer necessary, as ninja is now included on all default GitHub runner instances.
+> If you do still need this functionality, making a fork of this action into your repository or
+> organization is the recommended path. No further development or maintenance will occur in this repo.
+
 [GitHub Action](https://github.com/features/actions) for installing ninja into
 the `PATH` for the job.
 
